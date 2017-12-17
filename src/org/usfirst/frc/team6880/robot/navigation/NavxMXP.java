@@ -1,16 +1,16 @@
 package org.usfirst.frc.team6880.robot.navigation;
 
-import org.usfirst.frc.team6880.robot.Robot;
+import org.usfirst.frc.team6880.robot.FRC6880Robot;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
 
 public class NavxMXP implements Gyro {
-	Robot robot=null;
+	FRC6880Robot robot=null;
 	public AHRS navx_device=null;
 	
-	public NavxMXP(Robot robot)
+	public NavxMXP(FRC6880Robot robot)
 	{
 		this.robot = robot;
 		this.navx_device = new AHRS(SPI.Port.kMXP);
@@ -46,5 +46,6 @@ public class NavxMXP implements Gyro {
 	{
 		return (double) navx_device.getRoll();
 	}
+	
 	
 }
