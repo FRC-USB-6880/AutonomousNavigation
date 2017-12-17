@@ -14,5 +14,9 @@ public class FRC6880Robot {
 		this.driveSys = new DriveSystem(this);
 	}
 	
+	public boolean isEnabled()
+	{
+		return wpilibRobot.isEnabled();
+	}
 	
 }
