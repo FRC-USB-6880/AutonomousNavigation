@@ -13,4 +13,9 @@ public class Navigation {
 		
 		System.out.println("frc6880: curYaw:" + gyro.getYaw() + ", curPitch:" + gyro.getPitch() + ", curRoll:" + gyro.getRoll());
 	}
+	
+	public void goStraightForTime(double seconds)
+	{
+		
+	}
 }
