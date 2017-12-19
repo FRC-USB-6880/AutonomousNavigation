@@ -1,22 +1,45 @@
 package org.usfirst.frc.team6880.robot;
 
+import org.usfirst.frc.team6880.robot.attachments.Shooter;
+import org.usfirst.frc.team6880.robot.driveTrain.DriveSystem;
 import org.usfirst.frc.team6880.robot.navigation.Navigation;
+import org.usfirst.frc.team6880.robot.util.ClipRange;
+import org.usfirst.frc.team6880.robot.util.Gamepad;
+
+import edu.wpi.first.wpilibj.Joystick;
 
 public class FRC6880Robot {
 	Robot wpilibRobot=null;
 	public Navigation navigation=null;
 	public DriveSystem driveSys=null;
+	Gamepad gamepad=null;
+	Shooter shooter=null;
 	
 	public FRC6880Robot(Robot wpilibRobot)
 	{
 		this.wpilibRobot = wpilibRobot;
-		this.navigation = new Navigation(this);
-		this.driveSys = new DriveSystem(this);
+		navigation = new Navigation(this);
+		driveSys = new DriveSystem(this);
+		shooter = new Shooter();
+		gamepad = new Gamepad(0);
 	}
 	
 	public boolean isEnabled()
 	{
 		return wpilibRobot.isEnabled();
+	}
+	
+	public void runTeleOp()
+	{
+		double speed = ClipRange.clip(-gamepad.leftStickY(), -1.0, 1.0);
+		double direction = ClipRange.clip(gamepad.rightStickX(), -1.0, 1.0);
+		
+		driveSys.drive(speed, direction);
+		
+		if (gamepad.rightTrigger())
+			shooter.enable();
+		else
+			shooter.disable();
 	}
 	
 }

@@ -76,7 +76,7 @@ public class Robot extends SampleRobot {
 	@Override
 	public void operatorControl() {
 		while (isOperatorControl() && isEnabled()) {
-			
+			robot.runTeleOp();
 			Timer.delay(0.005); // wait for a motor update time
 		}
 	}
