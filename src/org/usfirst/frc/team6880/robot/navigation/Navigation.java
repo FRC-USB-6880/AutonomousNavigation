@@ -47,6 +47,31 @@ public class Navigation {
 	}
 	
 	/**
+	 * This method maintains a yaw while driving to a specified distance.
+	 * @see goStraightPID
+	 * @param speed Speed of robot, from -1.0 to 1.0.
+	 * @param distance Distance the robot should drive straight for, in inches.
+	 */
+	public void goStraightForDist(double speed, double distance)
+	{
+		double startingYaw = gyro.getYaw();
+		boolean backwards = speed < 0 ? true : false;		//If speed is negative, true, else false
+		speed = Math.abs(speed);
+		
+		robot.driveSys.resetEncoders();
+		
+		double avgDist = (robot.driveSys.getLeftEncoderPos() + robot.driveSys.getRightEncoderPos()) / 2;
+		while(avgDist < distance && robot.isEnabled())
+		{
+			goStraightPID(speed, backwards, startingYaw);
+//			robot.driveSys.drive(speed, 0.0);
+			avgDist = (robot.driveSys.getLeftEncoderPos() + robot.driveSys.getRightEncoderPos()) / 2;
+			System.out.println(avgDist);
+		}
+		robot.driveSys.tankDrive(0.0, 0.0);
+	}
+	
+	/**
 	 * This method applies a PID correction to the {@link DriveSystem#tankDrive} to maintain a heading, 
 	 * based on the private constants {@code GYRO_KP}, {@code GYRO_KI}, and {@code GYRO_KD}.
 	 * @param speed Speed of robot, from 0.0 to 1.0.
@@ -92,6 +117,17 @@ public class Navigation {
 			robot.driveSys.tankDrive(leftSpeed, rightSpeed);
 			Timer.delay(0.005);
 		}
+		
+//		robot.driveSys.resetEncoders();
+//		double arcLength = Math.toRadians(angle)*robot.driveSys.DRIVE_TRAIN_RADIUS;
+//		double avgDist = (Math.abs(robot.driveSys.getLeftEncoderPos()) + Math.abs(robot.driveSys.getRightEncoderPos())) / 2;
+//		while(avgDist < arcLength && robot.isEnabled())
+//		{
+//			robot.driveSys.tankDrive(speed, -speed);
+//			avgDist = (Math.abs(robot.driveSys.getLeftEncoderPos()) + Math.abs(robot.driveSys.getRightEncoderPos())) / 2;
+//		}
+		
+		robot.driveSys.tankDrive(0.0, 0.0);
 	}
 	
 	/**
@@ -117,7 +153,5 @@ public class Navigation {
 		{
 			robot.driveSys.tankDrive(speed, -speed);
 		}
-		
-		
 	}
 }

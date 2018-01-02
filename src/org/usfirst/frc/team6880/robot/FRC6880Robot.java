@@ -13,14 +13,14 @@ public class FRC6880Robot {
 	public Navigation navigation=null;
 	public DriveSystem driveSys=null;
 	Gamepad gamepad=null;
-	Shooter shooter=null;
+	//Shooter shooter=null;
 	
 	public FRC6880Robot(Robot wpilibRobot)
 	{
 		this.wpilibRobot = wpilibRobot;
 		navigation = new Navigation(this);
 		driveSys = new DriveSystem(this);
-		shooter = new Shooter();
+		//shooter = new Shooter();
 		gamepad = new Gamepad(0);
 	}
 	
@@ -36,10 +36,15 @@ public class FRC6880Robot {
 		
 		driveSys.drive(speed, direction);
 		
-		if (gamepad.rightTrigger())
-			shooter.enable();
-		else
-			shooter.disable();
+//		if (gamepad.rightTrigger())
+//			shooter.enable();
+//		else
+//			shooter.disable();
 	}
 	
+	public void runAutonomous()
+	{
+		navigation.goStraightForDist(0.2, 12.0);
+		navigation.turnDegrees(0.2, 90.0);
+	}
 }

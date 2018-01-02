@@ -65,7 +65,7 @@ public class Robot extends SampleRobot {
 			break;
 		case defaultAuto:
 		default:
-			
+			robot.runAutonomous();
 			break;
 		}
 	}
