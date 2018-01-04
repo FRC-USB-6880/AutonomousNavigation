@@ -4,7 +4,7 @@ import org.usfirst.frc.team6880.robot.attachments.Shooter;
 import org.usfirst.frc.team6880.robot.driveTrain.DriveSystem;
 import org.usfirst.frc.team6880.robot.navigation.Navigation;
 import org.usfirst.frc.team6880.robot.util.ClipRange;
-import org.usfirst.frc.team6880.robot.util.Gamepad;
+import org.usfirst.frc.team6880.robot.util.LogitechF310;
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -12,7 +12,7 @@ public class FRC6880Robot {
 	Robot wpilibRobot=null;
 	public Navigation navigation=null;
 	public DriveSystem driveSys=null;
-	Gamepad gamepad=null;
+	LogitechF310 gamepad=null;
 	//Shooter shooter=null;
 	
 	public FRC6880Robot(Robot wpilibRobot)
@@ -21,7 +21,7 @@ public class FRC6880Robot {
 		navigation = new Navigation(this);
 		driveSys = new DriveSystem(this);
 		//shooter = new Shooter();
-		gamepad = new Gamepad(0);
+		gamepad = new LogitechF310(0);
 	}
 	
 	public boolean isEnabled()
