@@ -29,6 +29,9 @@ public class NavxMXP implements Gyro {
 		}
 		
 		navx_device.zeroYaw();
+		System.out.println("frc6880: navxMXP done with calibration");
+		System.out.println("frc6880: curYaw = " + getYaw() + " curPitch = " + 
+		                    getPitch() + " curRoll = " + getRoll());
 	}
 	
 	@Override

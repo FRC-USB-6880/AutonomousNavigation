@@ -66,7 +66,7 @@ public class Navigation {
 			goStraightPID(speed, backwards, startingYaw);
 //			robot.driveSys.drive(speed, 0.0);
 			avgDist = (robot.driveSys.getLeftEncoderPos() + robot.driveSys.getRightEncoderPos()) / 2;
-			System.out.println(avgDist);
+			System.out.println("avgDist = " + avgDist);
 		}
 		robot.driveSys.tankDrive(0.0, 0.0);
 	}
