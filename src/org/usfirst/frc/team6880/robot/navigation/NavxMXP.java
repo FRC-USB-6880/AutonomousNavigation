@@ -17,19 +17,21 @@ public class NavxMXP implements Gyro {
 		this.robot = robot;
 		this.navx_device = new AHRS(SPI.Port.kMXP);
 		
-		if(navx_device.isConnected())
-			System.out.println("frc6880: navxMXP is connected");
-		else
-			System.out.println("frc6880: navxMXP is not connected");
+		while (!navx_device.isConnected())
+		{
+			System.out.println("frc6880: navxMXP is not yet connected");
+		    Timer.delay(.02);
+		}
+        System.out.println("frc6880: navxMXP is connected");
 		
-		if(navx_device.isCalibrating())
+		while (navx_device.isCalibrating())
 		{
 			System.out.println("frc6880: navxMXP still callibrating");
 			Timer.delay(.02);
 		}
+        System.out.println("frc6880: navxMXP done with calibration");
 		
 		navx_device.zeroYaw();
-		System.out.println("frc6880: navxMXP done with calibration");
 		System.out.println("frc6880: curYaw = " + getYaw() + " curPitch = " + 
 		                    getPitch() + " curRoll = " + getRoll());
 	}
@@ -50,6 +52,12 @@ public class NavxMXP implements Gyro {
 	public double getRoll()
 	{
 		return (double) navx_device.getRoll();
+	}
+	
+	public void printCurNavigationValues()
+	{
+        System.out.println("frc6880: curYaw = " + getYaw() + " curPitch = " + 
+                getPitch() + " curRoll = " + getRoll());	    
 	}
 	
 }

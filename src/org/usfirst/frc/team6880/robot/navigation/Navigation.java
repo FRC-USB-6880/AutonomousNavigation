@@ -111,9 +111,14 @@ public class Navigation {
 		double rightSpeed = angle<0 ? speed : -speed;
 		double targetYaw = gyro.getYaw() + angle;
 		double curYaw = gyro.getYaw();
+		double tolerance = 3; // tolerance in degrees
 		
-		while(curYaw != targetYaw && robot.isEnabled())
+		while(robot.isEnabled())
 		{
+            curYaw = gyro.getYaw();
+            this.printCurNavigationValues();
+		    if ((curYaw >= targetYaw-tolerance) && (curYaw <= targetYaw+tolerance))
+		        break;
 			robot.driveSys.tankDrive(leftSpeed, rightSpeed);
 			Timer.delay(0.005);
 		}
@@ -154,4 +159,9 @@ public class Navigation {
 			robot.driveSys.tankDrive(speed, -speed);
 		}
 	}
+	
+    public void printCurNavigationValues() {
+        System.out.println("frc6880: curYaw = " + gyro.getYaw() + " curPitch = " + 
+                gyro.getPitch() + " curRoll = " + gyro.getRoll());
+    }
 }

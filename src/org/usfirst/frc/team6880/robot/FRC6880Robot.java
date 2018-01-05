@@ -31,10 +31,12 @@ public class FRC6880Robot {
 	
 	public void runTeleOp()
 	{
-		double speed = ClipRange.clip(-gamepad.leftStickY(), -1.0, 1.0);
+//		double speed = ClipRange.clip(-gamepad.leftStickY(), -1.0, 1.0);
+	    double speed = ClipRange.clip(-gamepad.leftStickY(), -0.3, 0.3);
 		double direction = ClipRange.clip(gamepad.rightStickX(), -1.0, 1.0);
 		
 		driveSys.drive(speed, direction);
+		navigation.printCurNavigationValues();
 		
 //		if (gamepad.rightTrigger())
 //			shooter.enable();
